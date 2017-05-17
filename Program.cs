@@ -243,7 +243,8 @@ namespace ConsoleApplication7
                 cafe[i / 8].reviews[4] = Convert.ToInt32(rev[4]);
             }
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            int a;
+            int a=0;
+            bool f = true;
             while (true)
             {
                 if (userIndex == -1)
@@ -253,7 +254,21 @@ namespace ConsoleApplication7
                 else
                     Console.WriteLine("You should type those numbers to...\n 1)Register\n 2)search\n 3)Give populars\n 4)Print info of " + (cafeIndex == -1 ? "(cafe name)" : "") + "\n 5)Give nearby " + (cafeIndex == -1 ? "(cafe name)" : "") + "\n 6)Give near (insert meters) " + (cafeIndex == -1 ? "(cafe name)" : "") + "\n 7)exit\n 12)Add revew to " + (cafeIndex == -1 ? "(cafe name)" : "") + "\n 13)Log out\nLogged in as " + user[userIndex].login);
                 if (cafeIndex != -1) Console.WriteLine("Search result " + cafe[cafeIndex].name);
-                a = Convert.ToInt32(Console.ReadLine());
+                while (f)
+                {
+                    try
+                    {
+                        a = Convert.ToInt32(Console.ReadLine());
+
+                    }
+                    catch (Exception s)
+                    {
+                        Console.WriteLine("Please enter only numbers");
+                        continue;
+                    }
+                    f = false;
+                }
+                //a = Convert.ToInt32(Console.ReadLine());
                 if (a == 2)
                 {
                     Console.WriteLine("Enter cafe name!!");
