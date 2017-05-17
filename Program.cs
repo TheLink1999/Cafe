@@ -209,8 +209,12 @@ namespace ConsoleApplication7
             lines = File.ReadAllLines(userPath);
             if (lines.Length > 0)
             {
-                for (int i = 0; i < lines.Length-4; i += 4)
+                for (int i = 0; i < lines.Length; i += 4)
                 {
+                    if (i==lines.Length-3)
+                    {
+                        break;
+                    }
                     if (lines[i + 3] == "")
                         user.Add(new User(lines[i],lines[i + 1]));
                     else
