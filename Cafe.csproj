@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Adress.cs" />
     <Compile Include="Cafe.cs" />
+    <Compile Include="ForConsole.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Revews.cs" />

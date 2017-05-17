@@ -58,9 +58,10 @@ namespace ConsoleApplication7
         }
         static public string Passsecurity(string pass) {
             string pass1 = "";
+            string key = "everybody goes to the rapture";
             for (int i = 0; i < pass.Length-1; i++)
             {
-                pass1 += (pass[i] * pass[i + 1]);
+                pass1 += (char)((pass[i] + pass[i + 1])+key[i]);
             }
             return pass1;
         }

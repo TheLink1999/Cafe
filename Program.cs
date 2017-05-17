@@ -21,7 +21,7 @@ namespace ConsoleApplication7
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(0, currentLineCursor);
         }
-        static string Pasword(int t, string b = "")
+        public static string Pasword(int t, string b = "")
 
         {
             string pass = "";
@@ -180,7 +180,6 @@ namespace ConsoleApplication7
             int ada = 0;
             while (true)
             {
-                //Console.WriteLine("Enter password!!");
                 string a = Pasword(0);
                 if (user[i].password.Equals(User.Passsecurity(a)))
                 {
@@ -204,21 +203,18 @@ namespace ConsoleApplication7
                 Console.WriteLine("Done!!))");
             }
         }
-       
+
         public static void Main()
         {
-            //ConsoleKeyInfo cki;
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            
             lines = File.ReadAllLines(userPath);
             if (lines.Length > 0)
             {
-                for (int i = 0; i < lines.Length - 3; i += 4)
+                for (int i = 0; i < lines.Length-4; i += 4)
                 {
                     if (lines[i + 3] == "")
-                        user.Add(new User(lines[i], lines[i + 1]));
+                        user.Add(new User(lines[i],lines[i + 1]));
                     else
-                        user.Add(new User(lines[i], lines[i + 1], true));
+                        user.Add(new User(lines[i],lines[i + 1], true));
                     string[] revs = lines[i + 2].Split();
                     if (revs.Length != 1)
                     {
@@ -242,11 +238,14 @@ namespace ConsoleApplication7
                 cafe[i / 8].reviews[3] = Convert.ToInt32(rev[3]);
                 cafe[i / 8].reviews[4] = Convert.ToInt32(rev[4]);
             }
+
+
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            int a=0;
+            int a = 0;
             bool f = true;
             while (true)
             {
+               
                 if (userIndex == -1)
                     Console.WriteLine("You should type those numbers to...\n 1)Register\n 2)search\n 3)Give populars\n 4)Print info of " + (cafeIndex == -1 ? "(cafe name)" : "") + "\n 5)Give nearby " + (cafeIndex == -1 ? "(cafe name)" : "") + "\n 6)Give near (insert meters) " + (cafeIndex == -1 ? "(cafe name)" : "") + "\n 7)exit\n 8)Log in");
                 else if (user[userIndex].isAdmin)
@@ -268,7 +267,7 @@ namespace ConsoleApplication7
                     }
                     f = false;
                 }
-                //a = Convert.ToInt32(Console.ReadLine());
+                f = true;
                 if (a == 2)
                 {
                     Console.WriteLine("Enter cafe name!!");
@@ -327,13 +326,12 @@ namespace ConsoleApplication7
                     e = true;
 
 
-
                     user.Add(new User(username, User.Passsecurity(password[0])));
+
                     if (a == 9)
                         user[user.Count - 1].isAdmin = true;
                     if (e)
                         Console.WriteLine("Finally!! what took you so long??");
-                    
                     Console.Clear();
                 }
                 if (a == 10)
@@ -367,26 +365,21 @@ namespace ConsoleApplication7
                         Console.WriteLine("Not logged in as Admin");
                     else if (userIndex == 0)
                     {
-                        //while (true) {
-                            try
-                            {
-                                Console.WriteLine("Enter name!! ");
-                                string n = Console.ReadLine();
-                                Console.WriteLine("Enter phone!! ");
-                                string p = Console.ReadLine();
-                                Console.WriteLine("Enter coordinates!! ");
-                                double x = Convert.ToDouble(Console.ReadLine());
-                                double y = Convert.ToDouble(Console.ReadLine());
-                                Console.WriteLine("country!! ");
-                                string country = Console.ReadLine();
-                                Console.WriteLine("CITY!!!!! ");
-                                string city = Console.ReadLine();
-                                Console.WriteLine("street please ");
-                                string street = Console.ReadLine();
-                                cafe.Add(new Cafe(n, p, x, y, country, city, street));
-                            }
-                            catch (Exception e){ Console.WriteLine("    Please try again\n"); } }
-                    //}
+                        Console.WriteLine("Enter name!! ");
+                        string n = Console.ReadLine();
+                        Console.WriteLine("Enter phone!! ");
+                        string p = Console.ReadLine();
+                        Console.WriteLine("Enter coordinates!! ");
+                        double x = Convert.ToDouble(Console.ReadLine());
+                        double y = Convert.ToDouble(Console.ReadLine());
+                        Console.WriteLine("country!! ");
+                        string country = Console.ReadLine();
+                        Console.WriteLine("CITY!!!!! ");
+                        string city = Console.ReadLine();
+                        Console.WriteLine("street please ");
+                        string street = Console.ReadLine();
+                        cafe.Add(new Cafe(n, p, x, y, country, city, street));
+                    }
                     else
                         Console.WriteLine("WHO DO YOU THINK YOU ARE??\nNOT Admin thats for sure");
                 }
@@ -479,10 +472,14 @@ namespace ConsoleApplication7
                 }
                 if (a == 3)
                     Cafe.GiveMostPopulars(cafe.ToList());
-                if (a == 7)
+                File.WriteAllText(userPath, "");
+                File.WriteAllText(cafePath, "");
+                if (a == 7 || a != 7)
                 {
-                    StreamWriter file1 = new StreamWriter(userPath);
                     StreamWriter file2 = new StreamWriter(cafePath);
+                    StreamWriter file1 = new StreamWriter(userPath);
+                    
+
                     foreach (User u in user)
                     {
                         file1.WriteLine(u.login);
@@ -494,8 +491,10 @@ namespace ConsoleApplication7
                         file1.WriteLine();
                         file1.WriteLine(u.isAdmin ? "Hi's ADMIN" : "");
                     }
+
                     file1.Flush();
                     file1.Close();
+
                     foreach (Cafe c in cafe)
                     {
                         file2.WriteLine(c.name);
@@ -509,7 +508,11 @@ namespace ConsoleApplication7
                     }
                     file2.Flush();
                     file2.Close();
-                    return;
+
+                    if (a == 7)
+                    {
+                        return;
+                    }
                 }
             }
         }
