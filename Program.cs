@@ -496,7 +496,7 @@ namespace ConsoleApplication7
                         file1.WriteLine(u.isAdmin ? "Hi's ADMIN" : "");
                     }
 
-                    file1.Flush();
+                    //file1.Flush();
                     file1.Close();
 
                     foreach (Cafe c in cafe)

@@ -33,7 +33,7 @@ namespace ConsoleApplication7
             for (i = 0; i < revews.Count; i++)
             {
                 if (revews[i].cafeName.Equals(name))
-                    return 1;
+                    return i;
             }
             return -1;
         }
